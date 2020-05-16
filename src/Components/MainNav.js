@@ -10,6 +10,7 @@ const MainNav = () => {
         <li><NavLink to="/sports">Sports</NavLink></li>
       </ul>
     </nav>
-    
   ); 
 }
+
+export default MainNav;

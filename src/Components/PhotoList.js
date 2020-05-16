@@ -5,7 +5,10 @@ const PhotoList = () => {
     /* Create an array of <Photo url={} /> components*/
   }
 
-  return (
-    {photos}
+  return ( 
+    <ul>
+      {photos}
+    </ul>
+    
   );
 }
