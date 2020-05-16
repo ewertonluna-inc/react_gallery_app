@@ -21,8 +21,7 @@ class SearchForm extends Component {
         value={this.state.value} 
         type="search" 
         name="search" 
-        placeholder="Search" 
-        ref={ input => this.query = input }
+        placeholder="Search"
         required 
         />
         

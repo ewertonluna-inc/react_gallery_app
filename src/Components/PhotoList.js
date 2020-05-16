@@ -9,6 +9,7 @@ const PhotoList = () => {
     <ul>
       {photos}
     </ul>
-    
   );
 }
+
+export default PhotoList;

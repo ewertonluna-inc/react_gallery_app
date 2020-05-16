@@ -6,3 +6,5 @@ const Photo = ({ url }) => (
     <img src={url} alt="" />
   </li>
 )
+
+export default Photo;
