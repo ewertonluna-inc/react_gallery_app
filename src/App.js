@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import MainNav from './Components/MainNav';
-import { BrowserRouter, Route } from 'react-router-dom';
+import {
+  BrowserRouter, 
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 import SearchForm from './Components/SearchForm';
-// import PhotoList from './Components/PhotoList';
+import PhotoList from './Components/PhotoList';
+import NotFound from './Components/NotFound';
 
 import axios from 'axios';
 import apiKey from './config';
-import PhotoList from './Components/PhotoList';
+
 
 
 class App extends Component {
@@ -15,7 +21,8 @@ class App extends Component {
     searchedPhotos: [],
     dogPhotos: [],
     sportsPhotos: [],
-    techPhotos: []
+    techPhotos: [],
+    loading: true
   }
 
   componentDidMount() {
@@ -33,31 +40,45 @@ class App extends Component {
 
   fetchDogPhotos = () => {
     this.fetchData('dogs')
-      .then(photos => this.setState({dogPhotos: photos}))
+      .then(photos => this.setState({dogPhotos: photos, loading: false}))
   }
 
   fetchSportsPhotos = () => {
     this.fetchData('sports')
-      .then(photos => this.setState({sportsPhotos: photos}))
+      .then(photos => this.setState({sportsPhotos: photos, loading: false}))
   }
 
   fetchTechPhotos = () => {
     this.fetchData('tech')
-      .then(photos => this.setState({techPhotos: photos}))
+      .then(photos => this.setState({techPhotos: photos, loading: false}))
+  }
+
+  fetchSearchedPhotos = (query) => {
+    this.fetchData(query)
+      .then(photos => this.setState({searchedPhotos: photos, loading:false}))
   }
 
   render() {
     return (
       <div className="container">
-        <SearchForm submitHandler={this.handleSearchSubmit}/>
+        <SearchForm searchHandler={this.fetchSearchedPhotos} />
+        
 
         <BrowserRouter>
           <MainNav />
-          <Route path="/dogs" render={() => <PhotoList data={this.state.dogPhotos} topic="Dogs"/>} />
-          <Route path="/sports" render={() => <PhotoList data={this.state.sportsPhotos} title="Sports"/>} />
-          <Route path="/tech" render={() => <PhotoList data={this.state.techPhotos} title="Tech"/>} />
-          <Route path="/search" render={() => <PhotoList data={this.state.searchedPhotos} title=""/>} />          
-        </BrowserRouter>
+          {
+            (this.state.loading) 
+            ? <p>Loading...</p> 
+            : <Switch>
+                <Route exact path="/" render={() => <Redirect to="/dogs"/>} />
+                <Route path="/dogs" render={() => <PhotoList data={this.state.dogPhotos} topic="Dogs"/>} />
+                <Route path="/sports" render={() => <PhotoList data={this.state.sportsPhotos} topic="Sports"/>} />
+                <Route path="/tech" render={() => <PhotoList data={this.state.techPhotos} topic="Tech"/>} />
+                <Route component={NotFound} />
+              </Switch>
+          }
+          </BrowserRouter>
+          
     
       </div>
     );
