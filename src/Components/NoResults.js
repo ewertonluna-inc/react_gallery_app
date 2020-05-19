@@ -8,3 +8,5 @@ const NotFound = () => {
     </li>
   );
 }
+
+export default NotFound;
