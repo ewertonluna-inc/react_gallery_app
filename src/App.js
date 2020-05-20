@@ -61,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <SearchForm searchHandler={this.fetchSearchedPhotos} />
+        <SearchForm handleSearch={this.fetchSearchedPhotos} />
         
 
         <BrowserRouter>
