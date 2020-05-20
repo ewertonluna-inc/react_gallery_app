@@ -54,6 +54,7 @@ class App extends Component {
   }
 
   fetchSearchedPhotos = (query) => {
+    this.setState({loading: true})
     this.fetchData(query)
       .then(photos => this.setState({searchedPhotos: photos, loading:false}))
   }
@@ -61,19 +62,20 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <SearchForm handleSearch={this.fetchSearchedPhotos} />
-        
-
         <BrowserRouter>
+          <SearchForm handleSearch={this.fetchSearchedPhotos} />
           <MainNav />
           {
             (this.state.loading) 
             ? <p>Loading...</p> 
-            : <Switch>
+            : 
+              <Switch>
                 <Route exact path="/" render={() => <Redirect to="/dogs"/>} />
                 <Route path="/dogs" render={() => <PhotoList data={this.state.dogPhotos} topic="Dogs"/>} />
                 <Route path="/sports" render={() => <PhotoList data={this.state.sportsPhotos} topic="Sports"/>} />
                 <Route path="/tech" render={() => <PhotoList data={this.state.techPhotos} topic="Tech"/>} />
+                <Route exact path="/search" render={() => <h2>Please, submit something in the search field.</h2>} />
+                <Route path="/search/:search" render={() => <PhotoList data={this.state.searchedPhotos} topic="Seached"/>} />
                 <Route component={NotFound} />
               </Switch>
           }

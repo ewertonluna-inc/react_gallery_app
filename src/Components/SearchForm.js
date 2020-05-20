@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class SearchForm extends Component {
   state = {
@@ -12,6 +13,8 @@ class SearchForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.handleSearch(this.state.value);
+    const path = `/search/${this.state.value}`;
+    this.props.history.push(path);
     e.currentTarget.reset(); // Reseting isn't working
   }
 
@@ -39,4 +42,4 @@ class SearchForm extends Component {
   }
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);
