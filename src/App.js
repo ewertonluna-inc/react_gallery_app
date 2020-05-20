@@ -75,7 +75,7 @@ class App extends Component {
                 <Route path="/sports" render={() => <PhotoList data={this.state.sportsPhotos} topic="Sports"/>} />
                 <Route path="/tech" render={() => <PhotoList data={this.state.techPhotos} topic="Tech"/>} />
                 <Route exact path="/search" render={() => <h2>Please, submit something in the search field.</h2>} />
-                <Route path="/search/:search" render={() => <PhotoList data={this.state.searchedPhotos} topic="Seached"/>} />
+                <Route path="/search/:search" render={() => <PhotoList data={this.state.searchedPhotos} topic="Searched"/>} />
                 <Route component={NotFound} />
               </Switch>
           }
