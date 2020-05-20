@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 class SearchForm extends Component {
-  state = {
-    value: ''
-  }
-
-  handleStateChange = (e) => {
-    this.setState({ value: e.target.value })
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.handleSearch(this.state.value);
-    const path = `/search/${this.state.value}`;
+    this.props.handleSearch(this.query.value);
+    const path = `/search/${this.query.value}`;
     this.props.history.push(path);
     e.currentTarget.reset(); // Reseting isn't working
   }
@@ -23,7 +16,7 @@ class SearchForm extends Component {
       <form className="search-form" onSubmit={this.handleSubmit}>
         <input
         onChange={this.handleStateChange}
-        value={this.state.value} 
+        ref={ input => this.query = input } 
         type="search" 
         name="search" 
         placeholder="Search"
