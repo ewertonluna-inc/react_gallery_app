@@ -1,8 +1,14 @@
 # REACT GALLERY APP
 This app was build to practice React skills. It is a single page app built in the style of modern applications to keep it fast, modular and in sync with the current web development trends.
 It was a great project to learn the best practices of working with React, like using JSX to write markup-like syntax directly in the JS files and managing state in a container componente (App.js)
-that passes data down to reusable stateless components.
-Additionally, it helped me to understand tools like **Create React App** and **React Router**.
+that passes data down to reusable stateless components.<br />
+Additionally, it helped me to understand tools like **Create React App** and **React Router**.<br />
+
+### The App
+The app consists in a app that fetches for data and displays three default topics as seen in the navigation links.<br />
+Clicking on each link takes the user to a specific route and displays the photos for that topic.<br />
+The user can also search for photos using a search field. After submiting, the app will display photos for the
+search and the url will be specific for that search. If no searches are found, the app shows a message informing the user.<br /><br /><br />
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
